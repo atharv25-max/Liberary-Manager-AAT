@@ -10,6 +10,57 @@ st.set_page_config(
     layout="wide"
 )
 
+# --- CUSTOM CSS TO INCREASE FONT SIZE (EXCEPT HEADERS) ---
+st.markdown("""
+    <style>
+        /* Base text elements: paragraphs, lists, etc. */
+        div[class*="stMarkdown"] p, 
+        div[class*="stMarkdown"] ul, 
+        div[class*="stMarkdown"] ol, 
+        div[class*="stMarkdown"] li {
+            font-size: 20px !important;
+        }
+        
+        /* Widget Labels (above inputs) */
+        .stTextInput label, 
+        .stSelectbox label, 
+        .stNumberInput label, 
+        .stRadio label {
+            font-size: 20px !important;
+        }
+        
+        /* Input text inside text boxes */
+        .stTextInput input {
+            font-size: 18px !important;
+        }
+        
+        /* Select box text */
+        .stSelectbox div[data-baseweb="select"] > div {
+            font-size: 18px !important;
+        }
+        
+        /* Sidebar Navigation Radio Options */
+        div[role="radiogroup"] label {
+            font-size: 18px !important;
+        }
+        
+        /* Buttons */
+        .stButton button {
+            font-size: 20px !important;
+        }
+        
+        /* Metric Labels */
+        div[data-testid="stMetricLabel"] {
+            font-size: 18px !important;
+        }
+        
+        /* Success/Error/Info Message Text */
+        .stAlert div[data-testid="stMarkdownContainer"] p {
+            font-size: 18px !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # --- 2. DATABASE SETUP ---
 def init_db():
     conn = sqlite3.connect('library.db')
