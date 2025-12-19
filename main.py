@@ -4,11 +4,87 @@ import sqlite3
 from datetime import datetime
 
 # --- 1. CONFIGURATION (Must be the first command) ---
-st.set_page_config(page_title="Smart Library System", page_icon="📚", layout="wide")
+st.set_page_config(
+    page_title="Smart Library System",
+    page_icon="📚",
+    layout="wide"
+)
 
+# --- CUSTOM CSS FOR DARK MODE & STYLING ---
+st.markdown("""
+    <style>
+        /* Main Background */
+        .stApp {
+            background-color: #0E1117;
+            color: #FAFAFA;
+        }
+        
+        /* Sidebar Background */
+        [data-testid="stSidebar"] {
+            background-color: #161B22;
+            border-right: 1px solid #30363D;
+        }
+        
+        /* Headings */
+        h1, h2, h3 {
+            color: #FF4B4B !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 600;
+        }
+        
+        /* Metrics Cards */
+        div[data-testid="stMetric"] {
+            background-color: #1F2937;
+            border: 1px solid #374151;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s;
+        }
+        div[data-testid="stMetric"]:hover {
+            transform: scale(1.02);
+            border-color: #FF4B4B;
+        }
+        
+        /* Buttons */
+        .stButton > button {
+            background: linear-gradient(135deg, #FF4B4B 0%, #FF914D 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px 0 rgba(255, 75, 75, 0.39);
+        }
+        .stButton > button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 75, 75, 0.23);
+        }
+        
+        /* Input Fields */
+        .stTextInput > div > div > input, .stSelectbox > div > div > div {
+            background-color: #0d1117;
+            color: white;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+        }
+        
+        /* DataFrame Styling */
+        div[data-testid="stDataFrame"] {
+            background-color: #1F2937;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        /* Alerts */
+        .stSuccess { background-color: rgba(21, 87, 36, 0.2); border: 1px solid #155724; color: #d4edda; }
+        .stError { background-color: rgba(114, 28, 36, 0.2); border: 1px solid #721c24; color: #f8d7da; }
+        .stInfo { background-color: rgba(12, 84, 96, 0.2); border: 1px solid #0c5460; color: #d1ecf1; }
+    </style>
+""", unsafe_allow_html=True)
 
-
-# --- 3. DATABASE SETUP ---
+# --- 2. DATABASE SETUP ---
 def init_db():
     conn = sqlite3.connect('library.db')
     c = conn.cursor()
@@ -30,7 +106,7 @@ def init_db():
 # Initialize DB on first run
 init_db()
 
-# --- 4. DATABASE FUNCTIONS ---
+# --- 3. DATABASE FUNCTIONS ---
 def add_book_to_db(book_id, title, author, category):
     conn = sqlite3.connect('library.db')
     c = conn.cursor()
@@ -66,7 +142,7 @@ def delete_book(book_id):
     conn.commit()
     conn.close()
 
-# --- 5. UI & NAVIGATION ---
+# --- 4. UI & NAVIGATION ---
 
 # Sidebar
 st.sidebar.title("📚 Library Menu")
@@ -84,7 +160,8 @@ if menu == "Dashboard":
             # Ensure 'logo.jpeg' is in the same directory
             st.image("logo.jpeg", use_container_width=True)
         except Exception:
-            st.warning("Logo not found")
+            # Fallback if logo is missing
+            st.warning("Logo not found (logo.jpeg)")
     
     st.markdown("<h2 style='text-align: center;'>BMS College of Engineering</h2>", unsafe_allow_html=True)
     st.markdown("---")
