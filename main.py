@@ -10,77 +10,131 @@ st.set_page_config(
     layout="wide"
 )
 
-# --- CUSTOM CSS FOR DARK MODE & STYLING ---
+# --- CUSTOM CSS FOR MODERN DARK THEME ---
 st.markdown("""
     <style>
+        /* Global Settings */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+        
+        html, body, [class*="css"] {
+            font-family: 'Inter', sans-serif;
+        }
+
         /* Main Background */
         .stApp {
-            background-color: #0E1117;
-            color: #FAFAFA;
+            background-color: #0F172A; /* Slate 900 */
+            color: #E2E8F0; /* Slate 200 */
         }
         
-        /* Sidebar Background */
+        /* Sidebar */
         [data-testid="stSidebar"] {
-            background-color: #161B22;
-            border-right: 1px solid #30363D;
+            background-color: #1E293B; /* Slate 800 */
+            border-right: 1px solid #334155;
         }
         
         /* Headings */
-        h1, h2, h3 {
-            color: #FF4B4B !important;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        h1 {
+            background: linear-gradient(90deg, #60A5FA, #A78BFA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        h2, h3 {
+            color: #F8FAFC !important;
             font-weight: 600;
         }
         
-        /* Metrics Cards */
+        /* Metric Cards */
         div[data-testid="stMetric"] {
-            background-color: #1F2937;
-            border: 1px solid #374151;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-            transition: transform 0.2s;
+            background-color: #1E293B; /* Slate 800 */
+            border: 1px solid #334155;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
         }
         div[data-testid="stMetric"]:hover {
-            transform: scale(1.02);
-            border-color: #FF4B4B;
+            transform: translateY(-2px);
+            border-color: #60A5FA;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+        }
+        div[data-testid="stMetric"] label {
+            color: #94A3B8; /* Slate 400 */
+            font-size: 0.9rem;
         }
         
         /* Buttons */
         .stButton > button {
-            background: linear-gradient(135deg, #FF4B4B 0%, #FF914D 100%);
+            background: linear-gradient(90deg, #3B82F6 0%, #2563EB 100%);
             color: white;
             border: none;
             border-radius: 8px;
             padding: 0.6rem 1.2rem;
-            font-weight: bold;
+            font-weight: 600;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 14px 0 rgba(255, 75, 75, 0.39);
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5);
         }
         .stButton > button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 75, 75, 0.23);
+            box-shadow: 0 6px 12px -1px rgba(59, 130, 246, 0.6);
         }
         
         /* Input Fields */
-        .stTextInput > div > div > input, .stSelectbox > div > div > div {
-            background-color: #0d1117;
+        .stTextInput > div > div > input {
+            background-color: #1E293B;
             color: white;
-            border: 1px solid #30363D;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .stTextInput > div > div > input:focus {
+            border-color: #60A5FA;
+            box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+        }
+        
+        /* Selectbox */
+        .stSelectbox > div > div > div {
+            background-color: #1E293B;
+            color: white;
+            border: 1px solid #475569;
             border-radius: 8px;
         }
         
-        /* DataFrame Styling */
+        /* DataFrame */
         div[data-testid="stDataFrame"] {
-            background-color: #1F2937;
+            background-color: #1E293B;
+            border: 1px solid #334155;
             border-radius: 10px;
             padding: 10px;
         }
         
-        /* Alerts */
-        .stSuccess { background-color: rgba(21, 87, 36, 0.2); border: 1px solid #155724; color: #d4edda; }
-        .stError { background-color: rgba(114, 28, 36, 0.2); border: 1px solid #721c24; color: #f8d7da; }
-        .stInfo { background-color: rgba(12, 84, 96, 0.2); border: 1px solid #0c5460; color: #d1ecf1; }
+        /* Success/Error/Info Messages */
+        .stSuccess {
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #34D399;
+            border-radius: 8px;
+        }
+        .stError {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #F87171;
+            border-radius: 8px;
+        }
+        .stInfo {
+            background-color: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #60A5FA;
+            border-radius: 8px;
+        }
+        
+        /* Custom horizontal rule */
+        hr {
+            margin: 2em 0;
+            border: 0;
+            border-top: 1px solid #334155;
+        }
     </style>
 """, unsafe_allow_html=True)
 
