@@ -32,6 +32,18 @@ st.markdown("""
             border-right: 1px solid #334155;
         }
         
+        /* Sidebar Navigation Fonts */
+        [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {
+            color: #E2E8F0 !important;
+            font-weight: 500;
+        }
+        [data-testid="stSidebar"] label {
+            color: #E2E8F0 !important;
+        }
+        [data-testid="stSidebar"] p {
+            color: #94A3B8; /* Slightly muted for descriptions */
+        }
+        
         /* Headings */
         h1 {
             background: linear-gradient(90deg, #60A5FA, #A78BFA);
